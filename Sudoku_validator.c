@@ -75,6 +75,8 @@ int check_subgrids() {
     }
     return 1;
 }
+
+
 // MAIN FUNCTION
 
 int main() {
