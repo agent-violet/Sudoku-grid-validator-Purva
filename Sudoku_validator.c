@@ -36,4 +36,53 @@ int check_rows() {
 
 int check_columns() {
     for (int c = 0; c < 9; c++) {
+int freq[10] = {0};
 
+        for (int r = 0; r < 9; r++) {
+            int num = grid[r][c];
+            if (num < 1 || num > 9) return 0;
+            freq[num]++;
+        }
+
+        for (int i = 1; i <= 9; i++) {
+            if (freq[i] != 1) return 0;
+        }
+    }
+    return 1;
+}
+
+
+// Check 3×3 subgrids
+
+int check_subgrids() {
+    for (int startRow = 0; startRow < 9; startRow += 3) {
+        for (int startCol = 0; startCol < 9; startCol += 3) {
+
+            int freq[10] = {0};
+
+            for (int r = 0; r < 3; r++) {
+                for (int c = 0; c < 3; c++) {
+                    int num = grid[startRow + r][startCol + c];
+                    if (num < 1 || num > 9) return 0;
+                    freq[num]++;
+                }
+            }
+
+            for (int i = 1; i <= 9; i++) {
+                if (freq[i] != 1) return 0;
+            }
+        }
+    }
+    return 1;
+}
+// MAIN FUNCTION
+
+int main() {
+    if (check_rows() && check_columns() && check_subgrids()) {
+        printf("VALID SOLUTION\n");
+    } else {
+        printf("INVALID SOLUTION\n");
+    }
+
+    return 0;
+}
